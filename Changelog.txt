@@ -1,0 +1,8 @@
+Version 1.0.0 - January 28, 2016
+--------------------------------
+Initial release, featuring automatic alerts for:
+
+	-Structure Destroyed
+	-Unit (e.g. combat robot) Lost
+	-Player Joined Game
+	-Low Power (via Power Sensor building)

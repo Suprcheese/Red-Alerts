@@ -1,0 +1,9 @@
+{
+  "name": "Red Alerts",
+  "version": "1.0.0",
+  "title": "Red Alerts",
+  "author": "Supercheese",
+  "homepage": "http://www.factorioforums.com/forum/viewtopic.php?f=92&t=19579",
+  "dependencies": ["base >= 0.12.17"],
+  "description": "Adds some useful warnings such as Low Power and Structure Destroyed, announced by the EVA voices from the Command and Conquer game series."
+}
