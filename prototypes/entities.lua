@@ -1,4 +1,3 @@
-if lowPowerWarning then
 data:extend({
   {
     type = "accumulator",
@@ -15,7 +14,7 @@ data:extend({
       type = "electric",
       buffer_capacity = "15J",
       usage_priority = "terciary",
-      input_flow_limit = "1W",
+      input_flow_limit = "2W",
       output_flow_limit = "1W"
     },
     picture =
@@ -67,4 +66,3 @@ data:extend({
   },
 }
 )
-end

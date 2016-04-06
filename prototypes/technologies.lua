@@ -5,13 +5,6 @@ data:extend({
   icon = "__Red Alerts__/graphics/AlertSystems.png",
   icon_size = 128,
   prerequisites = {"circuit-network"},
-  effects =
-  {
-   {
-    type = "unlock-recipe",
-    recipe = "power-sensor"
-   },
-  },
   unit =
     {
       count = 40,
@@ -25,3 +18,7 @@ data:extend({
   order = "a-d-e",
  },
 })
+
+if lowPowerWarning then
+	data.raw["technology"]["alert-systems"].effects = {{type = "unlock-recipe",	recipe = "power-sensor"}}
+end

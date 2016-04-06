@@ -6,3 +6,19 @@ Initial release, featuring automatic alerts for:
 	-Unit (e.g. combat robot) Lost
 	-Player Joined Game
 	-Low Power (via Power Sensor building)
+
+
+Version 1.0.1 - January 29, 2016
+--------------------------------
+Fixed an error when the low power alert was disabled in config.lua.
+
+
+Version 1.0.2 - January 31, 2016
+--------------------------------
+Land-mine-type entities are now ignored by the "Structure destroyed" warning.
+
+
+Version 1.0.3 - February 13, 2016
+--------------------------------
+Reduced the lag that was caused when large numbers of biters were dying.
+Thanks to daydev: simplified the code for sound definitions and added a new, unvoiced soundset.

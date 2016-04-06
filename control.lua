@@ -49,7 +49,7 @@ function findSensor(sensor)
 end
 
 script.on_event(defines.events.on_entity_died, function(event)
-	if event.entity.type == "tree" or event.entity.type == "simple-entity" then
+	if event.entity.type == "tree" or event.entity.type == "simple-entity" or event.entity.type == "land-mine" or event.entity.type == "unit" or event.entity.type == "unit-spawner" then
 		return
 	end
 	if event.entity.name == "power_sensor" then
