@@ -4,10 +4,7 @@
 -- "RedAlert" - C&C: Red Alert from 1996
 -- "TiberianSunEVA" - C&C: Tiberian Sun EVA
 -- "TiberianSunCABAL" - C&C: Tiberian Sun CABAL
--- "SFX_daydev" - non-verbal sound notifications (probably, not very good) 
---
--- Even on MP servers, you should be able to choose your preferred voice, even if it is not the same voice as the server host.
--- Please report any bugs if this is not the case.
+-- "SFX_daydev" - non-verbal sound notifications (probably, not very good)
 
 voiceStyle = "CommandAndConquer"
 
