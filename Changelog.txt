@@ -22,3 +22,10 @@ Version 1.0.3 - February 13, 2016
 --------------------------------
 Reduced the lag that was caused when large numbers of biters were dying.
 Thanks to daydev: simplified the code for sound definitions and added a new, unvoiced soundset.
+
+
+Version 1.0.4 - April 17, 2016
+--------------------------------
+Fixed a rare bug when forces merged.
+Add Polish translation, courtesy of LubieArbuzy.
+Factorio version 0.12.30 implemented mod checksumming, so you now must use the same voice style as everyone else in MP.

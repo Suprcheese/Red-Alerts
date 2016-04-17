@@ -1,7 +1,7 @@
-Red Alerts 1.0.3
+Red Alerts 1.0.4
 ================
 
-Version 1.0.3 was released February 13, 2016, was tested using Factorio v0.12.22, and was authored by Supercheese, with contributions from daydev.
+Version 1.0.4 was released April 17, 2016, was tested using Factorio v0.12.30, and was authored by Supercheese, with contributions from daydev.
 
 Do you wish there was a separate notification for when a structure is destroyed, rather than just using the same sound as when a structure is merely damaged? Then this mod is for you!
 After researching the "Automated Alert Systems" technology (a relatively cheap early-game tech) you will begin to hear automated voiced alerts for certain events:
