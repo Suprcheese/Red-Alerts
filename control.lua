@@ -25,7 +25,7 @@ end
 
 script.on_event(defines.events.on_forces_merging, function(event)
 	if global.ticks[event.source.name] then
-		table.remove(global.ticks, event.source.name)
+		global.ticks[event.source.name] = nil
 	end
 end)
 
@@ -104,26 +104,6 @@ script.on_event(defines.events.on_tick, function(event)
 		end
 	end
 end)
-
-function messageAll(mes)
-  for i, player in ipairs(game.players) do
-	if player.connected then
-		player.print(mes)
-	end
-  end
-end
-
-function messageForce(mes, force)
-  for i, player in ipairs(force.players) do
-	if player.connected then
-		player.print(mes)
-	end
-  end
-end
-
-function messagePlayer(mes, player)
-    player.print(mes)
-end
 
 function playSoundForPlayer(sound, player)
 	player.surface.create_entity({name = sound, position = player.position})
