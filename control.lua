@@ -6,19 +6,13 @@ script.on_init(function() On_Init() end)
 script.on_configuration_changed(function() On_Init() end)
 
 function On_Init()
-	if not global.ticks then
-		global.ticks = {}
-	end
-	if not global.power_sensors then
-		global.power_sensors = {}
-	end
-	if not global.connected then
-		global.connected = {}
-	end
+	global.ticks = global.ticks or {}
+	global.power_sensors = global.power_sensors or {}
+	global.connected = global.connected or {}
 	for i, force in pairs(game.forces) do
 		global.ticks[force.name] = game.tick + minTicksBetweenAlerts
 	end
-	for i, player in ipairs(game.players) do
+	for i, player in pairs(game.players) do
 		global.connected[player.index] = player.connected
 	end
 end
@@ -40,7 +34,7 @@ script.on_event(defines.events.on_player_created, function(event)
 end)
 
 function findSensor(sensor)
-	for i,s in ipairs(global.power_sensors) do
+	for i,s in pairs(global.power_sensors) do
 		if s == sensor then
 			return i
 		end
@@ -49,7 +43,8 @@ function findSensor(sensor)
 end
 
 script.on_event(defines.events.on_entity_died, function(event)
-	if event.entity.type == "tree" or event.entity.type == "simple-entity" or event.entity.type == "land-mine" or event.entity.type == "unit" or event.entity.type == "unit-spawner" then
+	local entityType = event.entity.type
+	if event.entity.force == "enemy" or entityType == "tree" or entityType == "simple-entity" or entityType == "land-mine" then
 		return
 	end
 	if event.entity.name == "power_sensor" then
@@ -61,7 +56,7 @@ script.on_event(defines.events.on_entity_died, function(event)
 	if (global.ticks[event.entity.force.name] and global.ticks[event.entity.force.name] > event.tick) or (event.entity.force.technologies["alert-systems"].researched == false) then
 		return
 	end
-	if event.entity.type == "car" or event.entity.type == "cargo-wagon" or event.entity.type == "combat-robot" or event.entity.type == "construction-robot" or event.entity.type == "locomotive" or event.entity.type == "logistic-robot" or event.entity.type == "player" then
+	if entityType == "car" or entityType == "cargo-wagon" or entityType == "combat-robot" or entityType == "construction-robot" or entityType == "locomotive" or entityType == "logistic-robot" or entityType == "player" then
 		if unitLostAlert then
 			playSoundForForce("unit-lost", event.entity.force)
 			global.ticks[event.entity.force.name] = event.tick + minTicksBetweenAlerts
@@ -79,9 +74,9 @@ end)
 script.on_event(defines.events.on_tick, function(event)
 	if game.tick % 60 == 4 then
 		if playerJoinedGameAlert then
-			for i, player in ipairs(game.players) do
+			for i, player in pairs(game.players) do
 				if global.connected[player.index] == false and player.connected == true then
-					for i, p in ipairs(player.force.players) do
+					for i, p in pairs(player.force.players) do
 						if p.connected and p.index ~= player.index and player.force.technologies["alert-systems"].researched == true then
 							playSoundForPlayer("reinforcements", p)
 						end
@@ -113,7 +108,7 @@ function playSoundForForce(sound, force)
 	if #force.players == 0 then
 		return
 	end
-	for i, player in ipairs(force.players) do
+	for i, player in pairs(force.players) do
 		if player.connected then
 			player.surface.create_entity({name = sound, position = player.position})
 		end
