@@ -20,7 +20,7 @@ data:extend({
     picture =
     {
       filename = "__Red Alerts__/graphics/PowerSensorBase.png",
-      priority = "extra-high",
+      priority = "high",
       width = 47,
       height = 29,
       shift = {0.0, -0.0}
