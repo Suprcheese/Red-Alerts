@@ -116,7 +116,7 @@ function playSoundForForce(sound, force)
 end
 
 script.on_event(defines.events.on_built_entity, function(event)
-	local player = game.get_player(event.player_index)
+	local player = game.players[event.player_index]
 	if event.created_entity.name == "power-sensor" then
 		table.insert(global.power_sensors, event.created_entity)
 		global.ticks[event.created_entity.force.name] = event.tick + minTicksBetweenAlerts
