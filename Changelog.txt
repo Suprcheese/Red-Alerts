@@ -29,3 +29,11 @@ Version 1.0.4 - April 17, 2016
 Fixed a rare bug when forces merged.
 Add Polish translation, courtesy of LubieArbuzy.
 Factorio version 0.12.30 implemented mod checksumming, so you now must use the same voice style as everyone else in MP.
+
+
+Version 1.0.5 - May 25, 2016
+----------------------------
+Added a popup that allows you to temporarily dismiss Low Power notifications.
+Removed redundant old Lua files.
+Code cleanup (caching et al.)
+Increase volume of Tiberian Sun EVA voice to more closely match volume of other announcers.
