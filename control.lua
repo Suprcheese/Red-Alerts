@@ -1,16 +1,19 @@
 require "util"
 require "defines"
-require ("config")
+require "config"
 
 script.on_init(function() On_Init() end)
 script.on_configuration_changed(function() On_Init() end)
 
 function On_Init()
 	global.ticks = global.ticks or {}
+	global.lowPowerTicks = global.lowPowerTicks or {}
+	global.lowPowerTicks["control"] = 1
 	global.power_sensors = global.power_sensors or {}
 	global.connected = global.connected or {}
 	for i, force in pairs(game.forces) do
 		global.ticks[force.name] = game.tick + minTicksBetweenAlerts
+		global.lowPowerTicks[force.name] = game.tick + minTicksBetweenAlerts
 	end
 	for i, player in pairs(game.players) do
 		global.connected[player.index] = player.connected
@@ -42,7 +45,33 @@ function findSensor(sensor)
 	return false
 end
 
+function dismissWarning(force, current_tick)
+	if not showSnoozePopup then return end
+	for i, player in pairs(force.players) do
+		local frame = player.gui.center["dismiss-low-power"]
+		if not frame and (global.lowPowerTicks["control"] < current_tick) then
+			frame = player.gui.center.add{type="frame", name="dismiss-low-power", caption={"dismiss-low-power-warning"}, direction="horizontal"}
+			frame.add{type="button", name="dismiss-yes-button", caption={"yes"}}
+			frame.add{type="button", name="dismiss-no-button", caption={"no"}}
+		end
+	end
+end
+
+script.on_event(defines.events.on_gui_click, function(event)
+	local player = game.players[event.element.player_index]
+	local name = event.element.name
+	local frame = player.gui.center["dismiss-low-power"]
+	if frame and (name == "dismiss-yes-button") then
+		global.lowPowerTicks[player.force.name] = event.tick + (60 * snoozeSeconds)
+		frame.destroy()
+	elseif frame and (name == "dismiss-no-button") then
+		global.lowPowerTicks["control"] = event.tick + (60 * snoozeSeconds)
+		frame.destroy()
+	end
+end)
+
 script.on_event(defines.events.on_entity_died, function(event)
+	local current_tick = event.tick
 	local entityType = event.entity.type
 	if event.entity.force == "enemy" or entityType == "tree" or entityType == "simple-entity" or entityType == "land-mine" then
 		return
@@ -53,25 +82,26 @@ script.on_event(defines.events.on_entity_died, function(event)
 			table.remove(global.power_sensors, i)
 		end
 	end
-	if (global.ticks[event.entity.force.name] and global.ticks[event.entity.force.name] > event.tick) or (event.entity.force.technologies["alert-systems"].researched == false) then
+	if (global.ticks[event.entity.force.name] and global.ticks[event.entity.force.name] > current_tick) or (event.entity.force.technologies["alert-systems"].researched == false) then
 		return
 	end
 	if entityType == "car" or entityType == "cargo-wagon" or entityType == "combat-robot" or entityType == "construction-robot" or entityType == "locomotive" or entityType == "logistic-robot" or entityType == "player" then
 		if unitLostAlert then
 			playSoundForForce("unit-lost", event.entity.force)
-			global.ticks[event.entity.force.name] = event.tick + minTicksBetweenAlerts
+			global.ticks[event.entity.force.name] = current_tick + minTicksBetweenAlerts
 		end
 		return
 	else
 		if structureDestroyedAlert then
 			playSoundForForce("structure-destroyed", event.entity.force)
-			global.ticks[event.entity.force.name] = event.tick + minTicksBetweenAlerts
+			global.ticks[event.entity.force.name] = current_tick + minTicksBetweenAlerts
 		end
 		return
 	end
 end)
 
 script.on_event(defines.events.on_tick, function(event)
+	local current_tick = event.tick
 	if game.tick % 60 == 4 then
 		if playerJoinedGameAlert then
 			for i, player in pairs(game.players) do
@@ -81,7 +111,7 @@ script.on_event(defines.events.on_tick, function(event)
 							playSoundForPlayer("reinforcements", p)
 						end
 					end
-					global.ticks[player.force.name] = event.tick + minTicksBetweenAlerts
+					global.ticks[player.force.name] = current_tick + minTicksBetweenAlerts
 					global.connected[player.index] = player.connected
 				end
 				if global.connected[player.index] == true and player.connected == false then
@@ -91,9 +121,14 @@ script.on_event(defines.events.on_tick, function(event)
 		end
 		if lowPowerWarning then
 			for i, sensor in pairs(global.power_sensors) do
-				if (sensor.energy < 1) and (global.ticks[sensor.force.name] and global.ticks[sensor.force.name] < event.tick) then
+				if (sensor.energy < 1) and global.ticks[sensor.force.name] and (global.ticks[sensor.force.name] < current_tick) and global.lowPowerTicks[sensor.force.name] and (global.lowPowerTicks[sensor.force.name] < current_tick) then
 					playSoundForForce("low-power", sensor.force)
-					global.ticks[sensor.force.name] = event.tick + minTicksBetweenAlerts
+					global.ticks[sensor.force.name] = current_tick + minTicksBetweenAlerts
+					if global.lowPowerTicks[sensor.force.name] == 1 then
+						dismissWarning(sensor.force, current_tick)
+						return
+					end
+					global.lowPowerTicks[sensor.force.name] = 1
 				end
 			end
 		end

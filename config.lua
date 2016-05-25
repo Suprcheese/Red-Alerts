@@ -22,3 +22,13 @@ lowPowerWarning = true
 playerJoinedGameAlert = true
 unitLostAlert = true
 structureDestroyedAlert = true
+
+
+-- Choose whether or not to show the "Dismiss Low Power Warning?" dialog.
+
+showSnoozePopup = true
+
+
+-- This is how many seconds the Low Power warning will be suppressed when you choose to dismiss it.
+
+snoozeSeconds = 30
