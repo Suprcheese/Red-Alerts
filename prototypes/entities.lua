@@ -23,7 +23,7 @@ data:extend({
       priority = "high",
       width = 47,
       height = 29,
-      shift = {0.0, -0.0}
+      shift = {0.0, 0.1}
     },
     charge_animation =
     {
@@ -32,7 +32,7 @@ data:extend({
 		height = 29,
 		line_length = 1,
 		frame_count = 1,
-		shift = {0.0, -0.0},
+		shift = {0.0, 0.1},
 		animation_speed = 0
     },
     charge_cooldown = 600,
@@ -44,7 +44,7 @@ data:extend({
 		height = 29,
 		line_length = 1,
 		frame_count = 1,
-		shift = {0.0, -0.0},
+		shift = {0.0, 0.1},
 		animation_speed = 0
     },
     discharge_cooldown = 60,
@@ -63,6 +63,21 @@ data:extend({
       },
       max_sounds_per_type = 0
     },
+    circuit_wire_connection_point =
+    {
+      shadow =
+      {
+        red = {0.008125, 0.484375},
+        green = {0.108125, 0.484375},
+      },
+      wire =
+      {
+        red = {0.0925, 0.34375},
+        green = {0.24875, 0.34375},
+      }
+    },
+	circuit_connector_sprites = get_circuit_connector_sprites({0.3, 0.28125}, {0.3, 0.28125}, 0),
+    circuit_wire_max_distance = 7.5,
+    default_output_signal = "signal-A"
   },
-}
-)
+})

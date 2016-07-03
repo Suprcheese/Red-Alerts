@@ -37,3 +37,10 @@ Added a popup that allows you to temporarily dismiss Low Power notifications.
 Removed redundant old Lua files.
 Code cleanup (caching et al.)
 Increase volume of Tiberian Sun EVA voice to more closely match volume of other announcers.
+
+Version 1.1.0 - July 3, 2016
+----------------------------
+Updated for Factorio 0.13.
+Added Hebrew localization (thanks to jocker-il).
+Increased default snooze duration to 60 seconds.
+Performance improvements.

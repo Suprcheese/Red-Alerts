@@ -31,4 +31,4 @@ showSnoozePopup = true
 
 -- This is how many seconds the Low Power warning will be suppressed when you choose to dismiss it.
 
-snoozeSeconds = 30
+snoozeSeconds = 60

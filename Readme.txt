@@ -1,7 +1,7 @@
-Red Alerts 1.0.5
+Red Alerts 1.1.0
 ================
 
-Version 1.0.5 was released May 25, 2016, was tested using Factorio v0.12.33, and was authored by Supercheese, with contributions from daydev.
+Version 1.1.0 was released July 3, 2016, was tested using Factorio v0.13.3, and was authored by Supercheese, with contributions from daydev.
 
 Do you wish there was a separate notification for when a structure is destroyed, rather than just using the same sound as when a structure is merely damaged? Then this mod is for you!
 After researching the "Automated Alert Systems" technology (a relatively cheap early-game tech) you will begin to hear automated voiced alerts for certain events:
@@ -13,8 +13,8 @@ After researching the "Automated Alert Systems" technology (a relatively cheap e
 
 The Power Sensor will try to trigger a Low Power notification whenever you are not generating enough power to satisfy all your factory's demands.
 Due to its nature, however, it is not very responsive to short bursts of low power, such as when many laser turrets are firing,
-but it is good at alerting you when your accumulators have only ~5% of their remaining charge during a long period of discharging, or
-other instances of sustained low power generation.
+but it is good at alerting you when your accumulators have only ~5% of their remaining charge during a long period of discharging, or other instances of sustained low power generation.
+Like with any accumulator in Factorio v0.13, the Power Sensor can output its charge state to the circuit network, if connected.
 
 
 You can choose between four different voices and one unvoiced soundset for the alerts:

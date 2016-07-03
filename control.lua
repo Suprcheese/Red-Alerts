@@ -1,5 +1,4 @@
 require "util"
-require "defines"
 require "config"
 
 script.on_init(function() On_Init() end)
@@ -10,13 +9,9 @@ function On_Init()
 	global.lowPowerTicks = global.lowPowerTicks or {}
 	global.lowPowerTicks["control"] = 1
 	global.power_sensors = global.power_sensors or {}
-	global.connected = global.connected or {}
 	for i, force in pairs(game.forces) do
 		global.ticks[force.name] = game.tick + minTicksBetweenAlerts
 		global.lowPowerTicks[force.name] = game.tick + minTicksBetweenAlerts
-	end
-	for i, player in pairs(game.players) do
-		global.connected[player.index] = player.connected
 	end
 end
 
@@ -26,14 +21,13 @@ script.on_event(defines.events.on_forces_merging, function(event)
 	end
 end)
 
-script.on_event(defines.events.on_player_created, function(event)
+script.on_event(defines.events.on_player_joined_game, function(event)
 	local player = game.players[event.player_index]
 	if (playerJoinedGameAlert == false) or (player.force.technologies["alert-systems"].researched == false) then
 		return
 	end
 	playSoundForForce("reinforcements", player.force)
 	global.ticks[player.force.name] = event.tick + minTicksBetweenAlerts
-	global.connected[player.index] = player.connected
 end)
 
 function findSensor(sensor)
@@ -103,22 +97,6 @@ end)
 script.on_event(defines.events.on_tick, function(event)
 	local current_tick = event.tick
 	if game.tick % 60 == 4 then
-		if playerJoinedGameAlert then
-			for i, player in pairs(game.players) do
-				if global.connected[player.index] == false and player.connected == true then
-					for i, p in pairs(player.force.players) do
-						if p.connected and p.index ~= player.index and player.force.technologies["alert-systems"].researched == true then
-							playSoundForPlayer("reinforcements", p)
-						end
-					end
-					global.ticks[player.force.name] = current_tick + minTicksBetweenAlerts
-					global.connected[player.index] = player.connected
-				end
-				if global.connected[player.index] == true and player.connected == false then
-					global.connected[player.index] = false
-				end
-			end
-		end
 		if lowPowerWarning then
 			for i, sensor in pairs(global.power_sensors) do
 				if (sensor.energy < 1) and global.ticks[sensor.force.name] and (global.ticks[sensor.force.name] < current_tick) and global.lowPowerTicks[sensor.force.name] and (global.lowPowerTicks[sensor.force.name] < current_tick) then
