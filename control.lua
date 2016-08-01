@@ -79,7 +79,7 @@ script.on_event(defines.events.on_entity_died, function(event)
 	if (global.ticks[event.entity.force.name] and global.ticks[event.entity.force.name] > current_tick) or (event.entity.force.technologies["alert-systems"].researched == false) then
 		return
 	end
-	if entityType == "car" or entityType == "cargo-wagon" or entityType == "combat-robot" or entityType == "construction-robot" or entityType == "locomotive" or entityType == "logistic-robot" or entityType == "player" then
+	if unitEntityTypes[entityType] then
 		if unitLostAlert then
 			playSoundForForce("unit-lost", event.entity.force)
 			global.ticks[event.entity.force.name] = current_tick + minTicksBetweenAlerts

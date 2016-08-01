@@ -32,3 +32,17 @@ showSnoozePopup = true
 -- This is how many seconds the Low Power warning will be suppressed when you choose to dismiss it.
 
 snoozeSeconds = 60
+
+
+-- This table enumerates all entity-types that are considered "units" and trigger the "Unit Lost" voice clip when destroyed, rather than "Structure Destroyed".
+
+unitEntityTypes = {}
+
+unitEntityTypes["unit"] = 				true
+unitEntityTypes["car"] = 				true
+unitEntityTypes["cargo-wagon"] = 		true
+unitEntityTypes["combat-robot"] = 		true
+unitEntityTypes["construction-robot"] = true
+unitEntityTypes["logistic-robot"] = 	true
+unitEntityTypes["locomotive"] = 		true
+unitEntityTypes["player"] = 			true
