@@ -38,9 +38,16 @@ Removed redundant old Lua files.
 Code cleanup (caching et al.)
 Increase volume of Tiberian Sun EVA voice to more closely match volume of other announcers.
 
+
 Version 1.1.0 - July 3, 2016
 ----------------------------
 Updated for Factorio 0.13.
 Added Hebrew localization (thanks to jocker-il).
 Increased default snooze duration to 60 seconds.
 Performance improvements.
+
+
+Version 1.1.1 - July 31, 2016
+----------------------------
+Enumerated which entity-types are considered "Units" rather than "Structures" in the configuration file.
+Entities of type "unit" (e.g. Robot Army bots) are now considered "Units".
