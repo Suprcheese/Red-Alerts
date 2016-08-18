@@ -70,7 +70,7 @@ script.on_event(defines.events.on_entity_died, function(event)
 	if event.entity.force == "enemy" or entityType == "tree" or entityType == "simple-entity" or entityType == "land-mine" then
 		return
 	end
-	if event.entity.name == "power_sensor" then
+	if event.entity.name == "power-sensor" then
 		local i = findSensor(event.entity)
 		if i then
 			table.remove(global.power_sensors, i)
