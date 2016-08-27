@@ -1,7 +1,7 @@
-Red Alerts 1.1.1
+Red Alerts 1.1.2
 ================
 
-Version 1.1.1 was released July 31, 2016, was tested using Factorio v0.13.11, and was authored by Supercheese, with contributions from daydev.
+Version 1.1.2 was released August 27, 2016, was tested using Factorio v0.14.1, and was authored by Supercheese, with contributions from daydev.
 
 After researching the "Automated Alert Systems" technology (a relatively cheap early-game tech) you will begin to hear automated voiced alerts for certain events:
 

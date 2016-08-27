@@ -48,6 +48,12 @@ Performance improvements.
 
 
 Version 1.1.1 - July 31, 2016
-----------------------------
+-----------------------------
 Enumerated which entity-types are considered "Units" rather than "Structures" in the configuration file.
 Entities of type "unit" (e.g. Robot Army bots) are now considered "Units".
+
+
+Version 1.1.2 - August 27, 2016
+-------------------------------
+Updated for Factorio 0.14.
+Fixed a silly typo leading to a crash when a power sensor is destroyed.
